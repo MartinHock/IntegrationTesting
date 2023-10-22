@@ -17,8 +17,9 @@ namespace Customer.APi.Tests.INtegration.ConstomerController
     public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifetime
     {
         public const string ValidGitHubUser = "validuser";
+        public const string ThrottledUser = "throttle";
 
-        private readonly PostgreSqlContainer _postgreSqlContainer =
+        private readonly PostgreSqlContainer _dbcontainer =
             new PostgreSqlBuilder()
                 .WithImage("postgres:latest")
                 .WithEnvironment("POSTGRES_USER", "postgres")
@@ -41,7 +42,7 @@ namespace Customer.APi.Tests.INtegration.ConstomerController
             {
                 services.RemoveAll(typeof(IDbConnectionFactory));
                 services.AddSingleton<IDbConnectionFactory>(_ =>
-                  new NpgsqlConnectionFactory(_postgreSqlContainer.GetConnectionString()));
+                  new NpgsqlConnectionFactory(_dbcontainer.GetConnectionString()));
 
                 services.AddHttpClient("GitHub", httpclient =>
                     {
@@ -60,13 +61,13 @@ namespace Customer.APi.Tests.INtegration.ConstomerController
         {
             _gitHubApiServer.Start();
             _gitHubApiServer.SetupUser("validuser");
-            await _postgreSqlContainer.StartAsync();
+            await _dbcontainer.StartAsync();
         }
 
         public new async Task DisposeAsync()
         {
             _gitHubApiServer.Dispose();
-            await _postgreSqlContainer.DisposeAsync();
+            await _dbcontainer.DisposeAsync();
         }
     }
 }
