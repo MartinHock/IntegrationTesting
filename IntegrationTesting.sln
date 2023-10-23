@@ -43,7 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.Api", "6. Real wo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.APi.Tests.Integration", "6. Real world testing\Tests\I-Tests\Customer.APi.Tests.INtegration\Customer.APi.Tests.Integration.csproj", "{DB581DD9-8771-4B0C-9C0C-E2264F7C5FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeApi", "FakeApi\FakeApi.csproj", "{F075A9E1-583F-4F7E-9055-49C58957ED90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeApi", "FakeApi\FakeApi.csproj", "{F075A9E1-583F-4F7E-9055-49C58957ED90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.WebApp", "7. Web UI testing\src\Customers.WebApp\Customers.WebApp.csproj", "{A975F4A8-D470-43DE-8754-B47245EB8F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{F075A9E1-583F-4F7E-9055-49C58957ED90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F075A9E1-583F-4F7E-9055-49C58957ED90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F075A9E1-583F-4F7E-9055-49C58957ED90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A975F4A8-D470-43DE-8754-B47245EB8F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A975F4A8-D470-43DE-8754-B47245EB8F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A975F4A8-D470-43DE-8754-B47245EB8F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A975F4A8-D470-43DE-8754-B47245EB8F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
