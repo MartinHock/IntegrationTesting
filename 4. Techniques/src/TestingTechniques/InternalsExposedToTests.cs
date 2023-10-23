@@ -1,3 +1,2 @@
-﻿
+﻿//[assembly: InternalsVisibleTo("TestingTechniques.Tests.Unit")]
 
-//[assembly: InternalsVisibleTo("TestingTechniques.Tests.Unit")]

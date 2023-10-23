@@ -9,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Testcontainers.PostgreSql;
-using Xunit;
 
 namespace Customers.Api.Tests.Integration;
 
@@ -39,12 +38,23 @@ public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
 
     private readonly GitHubApiServer _gitHubApiServer = new();
 
+    public async Task InitializeAsync()
+    {
+        _gitHubApiServer.Start();
+        _gitHubApiServer.SetupUser(ValidGithubUser);
+        _gitHubApiServer.SetupThrottledUser(ThrottledUser);
+        await _dbContainer.StartAsync();
+    }
+
+    public new async Task DisposeAsync()
+    {
+        await _dbContainer.DisposeAsync();
+        _gitHubApiServer.Dispose();
+    }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureLogging(logging =>
-        {
-            logging.ClearProviders();
-        });
+        builder.ConfigureLogging(logging => { logging.ClearProviders(); });
 
         builder.ConfigureTestServices(services =>
         {
@@ -63,20 +73,6 @@ public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
                     HeaderNames.UserAgent, $"Course-{Environment.MachineName}");
             });
         });
-    }
-
-    public async Task InitializeAsync()
-    {
-        _gitHubApiServer.Start();
-        _gitHubApiServer.SetupUser(ValidGithubUser);
-        _gitHubApiServer.SetupThrottledUser(ThrottledUser);
-        await _dbContainer.StartAsync();
-    }
-
-    public new async Task DisposeAsync()
-    {
-        await _dbContainer.DisposeAsync();
-        _gitHubApiServer.Dispose();
     }
 }
 

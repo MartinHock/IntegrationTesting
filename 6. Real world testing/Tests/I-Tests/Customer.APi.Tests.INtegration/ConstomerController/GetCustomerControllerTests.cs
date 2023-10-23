@@ -4,7 +4,6 @@ using Bogus;
 using Customers.Api.Contracts.Requests;
 using Customers.Api.Contracts.Responses;
 using FluentAssertions;
-using Xunit;
 
 namespace Customers.Api.Tests.Integration.CustomerController;
 

@@ -1,3 +1,5 @@
 ﻿namespace Customers.Api;
 
-public interface IApiMarker { }
+public interface IApiMarker
+{
+}

@@ -1,12 +1,12 @@
-﻿using System.Net;
-using System.Net.Http.Json;
-using Bogus;
+﻿using Bogus;
 using Customers.Api.Contracts.Requests;
 using Customers.Api.Contracts.Responses;
+using Customers.Api.Tests.Integration;
 using FluentAssertions;
-using Xunit;
+using System.Net;
+using System.Net.Http.Json;
 
-namespace Customers.Api.Tests.Integration.CustomerController;
+namespace Customer.APi.Tests.Integration.ConstomerController;
 
 public class GetAllCustomerControllerTests : IClassFixture<CustomerApiFactory>
 {
@@ -38,7 +38,7 @@ public class GetAllCustomerControllerTests : IClassFixture<CustomerApiFactory>
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var customersResponse = await response.Content.ReadFromJsonAsync<GetAllCustomersResponse>();
         customersResponse!.Customers.Single().Should().BeEquivalentTo(createdCustomer);
-        
+
         // Cleanup
         await _client.DeleteAsync($"customers/{createdCustomer!.Id}");
     }

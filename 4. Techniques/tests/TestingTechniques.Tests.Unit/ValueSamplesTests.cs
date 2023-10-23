@@ -36,9 +36,9 @@ public class ValueSamplesTests
     {
         var dateOfBirth = _sut.DateOfBirth;
 
-        dateOfBirth.Should().Be(new(2000, 6, 9));
-        dateOfBirth.Should().BeInRange(new(2000, 1, 1), new(2001, 1, 1));
-        dateOfBirth.Should().BeGreaterThan(new(2000, 1, 1));
+        dateOfBirth.Should().Be(new DateOnly(2000, 6, 9));
+        dateOfBirth.Should().BeInRange(new DateOnly(2000, 1, 1), new DateOnly(2001, 1, 1));
+        dateOfBirth.Should().BeGreaterThan(new DateOnly(2000, 1, 1));
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class ValueSamplesTests
         {
             FullName = "Nick Chapsas",
             Age = 21,
-            DateOfBirth = new(2000, 6, 9)
+            DateOfBirth = new DateOnly(2000, 6, 9)
         };
 
         var user = _sut.AppUser;
@@ -65,7 +65,7 @@ public class ValueSamplesTests
         {
             FullName = "Nick Chapsas",
             Age = 21,
-            DateOfBirth = new (2000, 6, 9)
+            DateOfBirth = new DateOnly(2000, 6, 9)
         };
 
         var users = _sut.Users.As<User[]>();

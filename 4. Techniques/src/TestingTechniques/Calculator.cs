@@ -26,10 +26,6 @@ public class Calculator
 
     private static void EnsureThatDivisorIsNotZero(float b)
     {
-        if (b == 0)
-        {
-            throw new DivideByZeroException();
-        }
+        if (b == 0) throw new DivideByZeroException();
     }
 }
-

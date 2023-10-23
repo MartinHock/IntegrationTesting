@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Bogus;
-using Customers.Api.Contracts.Requests;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -18,13 +16,13 @@ public class GetCustomerControllerTests : IClassFixture<WebApplicationFactory<IA
     {
         _httpClient = appFactory.CreateClient();
     }
-    
+
     [Fact]
     public async Task Get_ReturnsNotFound_WhenCustomerDoesNotExist()
     {
         // Act
         var response = await _httpClient.GetAsync($"customers/{Guid.NewGuid()}");
-        
+
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         var problem = await response.Content.ReadFromJsonAsync<ValidationProblemDetails>();

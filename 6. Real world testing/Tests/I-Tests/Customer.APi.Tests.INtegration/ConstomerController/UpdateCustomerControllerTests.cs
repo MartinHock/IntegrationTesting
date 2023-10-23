@@ -5,7 +5,6 @@ using Customers.Api.Contracts.Requests;
 using Customers.Api.Contracts.Responses;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Xunit;
 
 namespace Customers.Api.Tests.Integration.CustomerController;
 
@@ -33,7 +32,7 @@ public class UpdateCustomerControllerTests : IClassFixture<CustomerApiFactory>
         var createdCustomer = await createdResponse.Content.ReadFromJsonAsync<CustomerResponse>();
 
         customer = _customerGenerator.Generate();
-        
+
         // Act
         var response = await _client.PutAsJsonAsync($"customers/{createdCustomer!.Id}", customer);
 
@@ -50,7 +49,7 @@ public class UpdateCustomerControllerTests : IClassFixture<CustomerApiFactory>
         var customer = _customerGenerator.Generate();
         var createdResponse = await _client.PostAsJsonAsync("customers", customer);
         var createdCustomer = await createdResponse.Content.ReadFromJsonAsync<CustomerResponse>();
-        
+
         const string invalidEmail = "dasdja9d3j";
         customer = _customerGenerator.Clone()
             .RuleFor(x => x.Email, invalidEmail).Generate();
@@ -65,7 +64,7 @@ public class UpdateCustomerControllerTests : IClassFixture<CustomerApiFactory>
         error.Title.Should().Be("One or more validation errors occurred.");
         error.Errors["Email"][0].Should().Be($"{invalidEmail} is not a valid email address");
     }
-    
+
     [Fact]
     public async Task Update_ReturnsValidationError_WhenGitHubUserDoestNotExist()
     {
@@ -73,7 +72,7 @@ public class UpdateCustomerControllerTests : IClassFixture<CustomerApiFactory>
         var customer = _customerGenerator.Generate();
         var createdResponse = await _client.PostAsJsonAsync("customers", customer);
         var createdCustomer = await createdResponse.Content.ReadFromJsonAsync<CustomerResponse>();
-        
+
         const string invalidGitHubUser = "dasdja9d3j";
         customer = _customerGenerator.Clone()
             .RuleFor(x => x.GitHubUsername, invalidGitHubUser).Generate();

@@ -5,7 +5,6 @@ using Customers.Api.Contracts.Requests;
 using Customers.Api.Contracts.Responses;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Xunit;
 
 namespace Customers.Api.Tests.Integration.CustomerController;
 
@@ -59,7 +58,7 @@ public class CreateCustomerControllerTests : IClassFixture<CustomerApiFactory>
         error.Title.Should().Be("One or more validation errors occurred.");
         error.Errors["Email"][0].Should().Be($"{invalidEmail} is not a valid email address");
     }
-    
+
     [Fact]
     public async Task Create_ReturnsValidationError_WhenGitHubUserDoestNotExist()
     {

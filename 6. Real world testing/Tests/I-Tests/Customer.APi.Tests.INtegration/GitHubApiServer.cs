@@ -10,6 +10,12 @@ public class GitHubApiServer : IDisposable
 
     public string Url => _server.Url!;
 
+    public void Dispose()
+    {
+        _server.Stop();
+        _server.Dispose();
+    }
+
     public void Start()
     {
         _server = WireMockServer.Start();
@@ -18,8 +24,8 @@ public class GitHubApiServer : IDisposable
     public void SetupUser(string username)
     {
         _server.Given(Request.Create()
-            .WithPath($"/users/{username}")
-            .UsingGet())
+                .WithPath($"/users/{username}")
+                .UsingGet())
             .RespondWith(Response.Create()
                 .WithBody(GenerateGitHubUserResponseBody(username))
                 .WithHeader("content-type", "application/json; charset=utf-8")
@@ -38,12 +44,6 @@ public class GitHubApiServer : IDisposable
 }")
                 .WithHeader("content-type", "application/json; charset=utf-8")
                 .WithStatusCode(403));
-    }
-
-    public void Dispose()
-    {
-        _server.Stop();
-        _server.Dispose();
     }
 
     private static string GenerateGitHubUserResponseBody(string username)
