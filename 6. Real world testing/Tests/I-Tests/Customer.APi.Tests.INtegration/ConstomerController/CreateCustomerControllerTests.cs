@@ -1,12 +1,13 @@
-﻿using System.Net;
-using System.Net.Http.Json;
-using Bogus;
+﻿using Bogus;
 using Customers.Api.Contracts.Requests;
 using Customers.Api.Contracts.Responses;
+using Customers.Api.Tests.Integration;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Net.Http.Json;
 
-namespace Customers.Api.Tests.Integration.CustomerController;
+namespace Customer.APi.Tests.Integration.ConstomerController;
 
 public class CreateCustomerControllerTests : IClassFixture<CustomerApiFactory>
 {
