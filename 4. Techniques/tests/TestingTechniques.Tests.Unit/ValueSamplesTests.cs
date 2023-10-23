@@ -1,5 +1,5 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
+using System;
 using Xunit;
 
 namespace TestingTechniques.Tests.Unit;
@@ -34,11 +34,26 @@ public class ValueSamplesTests
     [Fact]
     public void DateAssertionExample()
     {
+        // the commented out code does not work any longer
+
+        // eventually the following might Help
+
+        //public static class DateOnlyAssertionExtensions
+        //{
+        //    public static void BeInRange(this DateOnlyAssertions assertions, DateOnly start, DateOnly end, string because = "", params object[] becauseArgs)
+        //    {
+        //        Execute.Assertion
+        //            .ForCondition(assertions.Subject >= start && assertions.Subject <= end)
+        //            .BecauseOf(because, becauseArgs)
+        //            .FailWith("Expected {context:date} to be within {0} and {1}{reason}, but found {2}.", start, end, assertions.Subject);
+        //    }
+        //}
+
         var dateOfBirth = _sut.DateOfBirth;
 
         dateOfBirth.Should().Be(new DateOnly(2000, 6, 9));
-        dateOfBirth.Should().BeInRange(new DateOnly(2000, 1, 1), new DateOnly(2001, 1, 1));
-        dateOfBirth.Should().BeGreaterThan(new DateOnly(2000, 1, 1));
+        // dateOfBirth.Should().BeInRange(new DateOnly(2000, 1, 1), new DateOnly(2001, 1, 1));
+        // dateOfBirth.Should().BeGreaterThan(new DateOnly(2000, 1, 1));
     }
 
     [Fact]
